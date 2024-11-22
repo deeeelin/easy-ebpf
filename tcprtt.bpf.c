@@ -33,8 +33,8 @@ int BPF_PROG(tcp_rcv, struct sock *sk) {
     // Read source and destination IP addresses and ports
     e->saddr = sk->__sk_common.skc_rcv_saddr;
     e->daddr = sk->__sk_common.skc_daddr;
-    e->sport = bpf_ntohs(sk->__sk_common.skc_num);
-    e->dport = bpf_ntohs(sk->__sk_common.skc_dport);
+    e->sport = sk->__sk_common.skc_num;
+    e->dport = sk->__sk_common.skc_dport;
 
     // Get RTT from the TCP socket structure
     struct tcp_sock *tp = (struct tcp_sock *)sk;
